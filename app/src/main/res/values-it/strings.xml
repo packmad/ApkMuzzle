@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Apk Muzzle</string>
+    <string name="already_installed">App già installata</string>
+    <string name="close">Chiudi</string>
+    <string name="didnt_select">Non hai selezionato alcun permesso!</string>
+    <string name="doesnt_require">Questa app non richiede alcun permesso</string>
+    <string name="errors">ERRORI!</string>
+    <string name="finished_removing">Ho finito di rimuovere i permessi da</string>
+    <string name="folder_cant">la cartella non può essere letta</string>
+    <string name="location">Posizione</string>
+    <string name="must_share">Devi condividere solo link del Google Play Store</string>
+    <string name="need_uninstall">Devi disinstallare la vecchia app prima di installare la nuova!</string>
+    <string name="no_messages">Nessun messaggio... è strano!</string>
+    <string name="no_perm">NESSUN PERMESSO</string>
+    <string name="no_selection">NESSUNA SELEZIONE</string>
+    <string name="not_implemented">Non ancora implementato</string>
+    <string name="permissions">Permessi da rimuovere:</string>
+    <string name="removing_permissions">Sto rimuovendo i permessi da</string>
+    <string name="were_errors">Si sono verificati degli errori durante il processo di rimozione che hanno interrotto la creazione del nuovo apk.</string>
+    <string name="yes">Si</string>
+    <string name="what_are_remove">Ho detto che questa app non richiede alcun permesso, cosa stai cercando di rimuovere?</string>
+    <string name="no">No</string>
+    <string name="action_settings">Impostazoni</string>
+    <string name="apps_installed">App installate:</string>
+    <string name="exit">USCITA</string>
+    <string name="out_msgs">Messaggi di output:</string>
+    <string name="read_apk">DA UN APK</string>
+    <string name="my_apps">DALLE APP</string>
+    <string name="install">Installa</string>
+    <string name="edit_and_save">Cambia&amp;Salva</string>
+    <string name="from_apk">...da un apk</string>
+    <string name="from_app">...da una tua app</string>
+    <string name="remove_from">Rimuovo i permessi... da dove?</string>
+    <string name="action_donate">Donazione!</string>
+</resources>

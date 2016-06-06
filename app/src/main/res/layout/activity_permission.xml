@@ -1,0 +1,38 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/LightBlue">
+
+<TextView
+    android:id="@+id/text"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:text="@string/permissions"
+    style="@style/Titles"
+    android:layout_width="wrap_content"
+    android:layout_height="48dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:gravity="center"/>
+
+<ListView
+    style="@style/LViews"
+    android:id="@+id/permissionlist"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/text"
+    android:layout_above="@+id/button_save"
+    tools:listitem="@android:layout/simple_list_item_1" />
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/edit_and_save"
+    android:id="@+id/button_save"
+    android:layout_gravity="center_horizontal"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    style="@style/Buttons" />
+
+</RelativeLayout>
