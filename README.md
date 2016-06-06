@@ -1,16 +1,16 @@
 # ApkMuzzle
 
-[ApkMuzzle](https://github.com/simoneaonzo/ApkMuzzle/blob/master/app/app-release.apk?raw=true) is an Android application for remove unwanted permissions from Android APKs without ROOT  permission!
+[ApkMuzzle](https://github.com/simoneaonzo/ApkMuzzle/blob/master/app/app-release.apk?raw=true) is an Android application for remove Ads and/or unwanted permissions from Android APKs without ROOT permission!
 
 How it works? It uses [RmPerm](https://github.com/simoneaonzo/RmPerm) (follow the link for a more detailed description) as external library and use the custom methods defined [here](https://github.com/simoneaonzo/ApkWithCustomMethods).
 
 ## Available on Google Play Store
 
-You can clone this repo and build it...  or you can comfortably download the app [from the Google Play Store](https://play.google.com/store/apps/details?id=it.unige.dibris.andrmperm).
+You can clone this repo and build it...  or you can comfortably download the app [from the Google Play Store](https://play.google.com/store/apps/details?id=it.
 
 ## How can I use it?
 
-I spent some hours for screenshots, description and video... see them on the Google Play Store.
+The GUI is shit but is very intuitive :)
 
 ## The GUI is horrible man!?!
 
