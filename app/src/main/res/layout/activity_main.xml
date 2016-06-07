@@ -41,14 +41,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="@string/advertising" />
+                android:text="@string/advertising"
+                android:textStyle="bold" />
 
             <Switch
                 android:id="@+id/SwitchPerms"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="@string/perms" />
+                android:text="@string/perms"
+                android:textStyle="bold" />
         </LinearLayout>
 
 

@@ -60,8 +60,8 @@
     <string name="were_errors">There were errors during the removal process that stopped the creation of the new apk</string>
     <string name="whence">Whence?</string>
     <string name="what_do_you_want">What do you want to remove?</string>
-    <string name="advertising">Advertising</string>
-    <string name="perms">Permissions</string>
+    <string name="advertising">Advertising     </string>
+    <string name="perms">Permissions     </string>
 
 
 </resources>
