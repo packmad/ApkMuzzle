@@ -1,60 +1,101 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/LightBlue"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="@color/LightBlue"
+    android:weightSum="1"
     tools:context=".MainActivity">
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/read_apk"
-        style="@style/Buttons"
-        android:id="@+id/button_read_apk"
-        android:onClick="readApk"
-        android:layout_marginTop="66dp"
+        android:layout_weight="0.13"
+        android:gravity="top|center"
+        android:orientation="vertical"
+        android:weightSum="1">
 
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:gravity="top"
+            android:text="@string/what_do_you_want"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/navy" />
 
-    <Button
-        style="@style/Buttons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/my_apps"
-        android:id="@+id/button"
-        android:onClick="getInstalledApp"
-        android:layout_marginTop="34dp"
-        android:layout_below="@+id/button_read_apk"
-        android:layout_alignStart="@+id/button_read_apk"
-        android:layout_alignLeft="@+id/button_read_apk"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.12"
+            android:gravity="top|center"
+            android:orientation="vertical">
 
-    <Button
-        style="@style/Buttons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/exit"
-        android:id="@+id/button2"
-        android:onClick="exit"
-        android:layout_below="@+id/button"
-        android:layout_alignLeft="@+id/button_read_apk"
-        android:layout_alignStart="@+id/button"
-        android:layout_marginTop="56dp" />
+            <Switch
+                android:id="@+id/SwitchAds"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/advertising" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/remove_from"
-        android:textColor="@color/navy"
-        android:id="@+id/textView2"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp" />
+            <Switch
+                android:id="@+id/SwitchPerms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/perms" />
+        </LinearLayout>
 
-</RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="85dp"
+            android:layout_weight="0."
+            android:gravity="top"
+            android:text="@string/whence"
+
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/navy" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/button_read_apk"
+                style="@style/Buttons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_horizontal"
+                android:onClick="readApk"
+                android:text="@string/read_apk" />
+
+            <Button
+                android:id="@+id/button"
+                style="@style/Buttons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_horizontal"
+                android:onClick="getInstalledApp"
+                android:text="@string/my_apps" />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

@@ -35,75 +35,74 @@ public class PermissionsMangeActivity extends Activity {
         setContentView(R.layout.activity_permission);
         Intent intent = getIntent();
         apkpath = intent.getStringExtra(PermissionsMangeActivity.EXTRA_PERMISSIONSMANAGE);
-        List<PermissionFlag> pfl = getApkPermission(apkpath);
-        noPerms = pfl.isEmpty();
-        if (noPerms) {
-            Utilities.ShowAlertDialog(
-                    this,
-                    getResources().getString(R.string.no_perm),
-                    getResources().getString(R.string.doesnt_require)
-            );
-        }
-        permissionAdapter = new PermissionAdapter(this, R.layout.permcheck_item, pfl);
-        ListView listView = (ListView) findViewById(R.id.permissionlist);
-        listView.setAdapter(permissionAdapter);
-        /*
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                PermissionFlag pf = (PermissionFlag) parent.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(),
-                        "Clicked on Row: " + pf.getName(),
-                        Toast.LENGTH_LONG).show();
-            }
-        });
-        */
 
-        Button myButton = (Button) findViewById(R.id.button_save);
-        myButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        saveApk();
-                    }
-                });
+        if (MainActivity.permsFlag) {
+            List<PermissionFlag> pfl = getApkPermission(apkpath);
+            noPerms = pfl.isEmpty();
+            if (noPerms) {
+                Utilities.ShowAlertDialog(
+                        this,
+                        getResources().getString(R.string.no_perm),
+                        getResources().getString(R.string.doesnt_require)
+                );
+            }
+            permissionAdapter = new PermissionAdapter(this, R.layout.permcheck_item, pfl);
+            ListView listView = (ListView) findViewById(R.id.permissionlist);
+            listView.setAdapter(permissionAdapter);
+
+
+            Button myButton = (Button) findViewById(R.id.button_save);
+            myButton.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            saveApk();
+                        }
+                    });
+        } else
+            saveApk();
 
     }
 
 
     public void saveApk() {
-        if (noPerms) {
-            Utilities.ShowAlertDialog(
-                    this,
-                    getResources().getString(R.string.no_perm),
-                    getResources().getString(R.string.what_are_remove)
-            );
-            return;
-        }
-        boolean noChecks = Iterables.all(
-                permissionAdapter.getItems(),
-                new Predicate<PermissionFlag>() {
-                    public boolean apply(PermissionFlag pf) {
-                        return !pf.isChecked();
-                    }
-                }
-        );
-        if (noChecks) {
-            Utilities.ShowAlertDialog(
-                    this,
-                    getResources().getString(R.string.no_selection),
-                    getResources().getString(R.string.didnt_select));
-            return;
-        }
-        StringBuilder sb = new StringBuilder();
-        for(PermissionFlag pf : permissionAdapter.getItems()) {
-            if(pf.isChecked()) {
-                sb.append(pf.getName()+",");
-            }
-        }
-        sb.setLength(sb.length()-1);
         String[] apkAndPerms = new String[2];
         apkAndPerms[0] = apkpath;
-        apkAndPerms[1] = sb.toString();
+
+        if (MainActivity.permsFlag) {
+            if (noPerms) {
+                Utilities.ShowAlertDialog(
+                        this,
+                        getResources().getString(R.string.no_perm),
+                        getResources().getString(R.string.what_are_remove)
+                );
+                return;
+            }
+            boolean noChecks = Iterables.all(
+                    permissionAdapter.getItems(),
+                    new Predicate<PermissionFlag>() {
+                        public boolean apply(PermissionFlag pf) {
+                            return !pf.isChecked();
+                        }
+                    }
+            );
+            if (noChecks) {
+                Utilities.ShowAlertDialog(
+                        this,
+                        getResources().getString(R.string.no_selection),
+                        getResources().getString(R.string.didnt_select));
+                return;
+            }
+            StringBuilder sb = new StringBuilder();
+            for (PermissionFlag pf : permissionAdapter.getItems()) {
+                if (pf.isChecked()) {
+                    sb.append(pf.getName() + ",");
+                }
+            }
+            sb.setLength(sb.length() - 1);
+            apkAndPerms[1] = sb.toString();
+        } else
+            apkAndPerms[1] = null;
 
         Intent intent = new Intent(this, SaveApkService.class);
         Bundle bundle = new Bundle();
@@ -111,7 +110,7 @@ public class PermissionsMangeActivity extends Activity {
         intent.putExtras(bundle);
         startService(intent);
 
-        Intent startMain = new Intent(Intent.ACTION_MAIN);
+        Intent startMain = new Intent(Intent.ACTION_MAIN); // launch home screen
         startMain.addCategory(Intent.CATEGORY_HOME);
         startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(startMain);
@@ -127,6 +126,11 @@ public class PermissionsMangeActivity extends Activity {
             permissions.add(new PermissionFlag(msgs[i]));
         }
         return permissions;
+    }
+
+    static class ViewHolder {
+        TextView title;
+        CheckBox checked;
     }
 
     public class PermissionAdapter extends ArrayAdapter<PermissionFlag> {
@@ -187,11 +191,6 @@ public class PermissionsMangeActivity extends Activity {
 
             return convertView;
         }
-    }
-
-    static class ViewHolder {
-        TextView title;
-        CheckBox checked;
     }
 
 }

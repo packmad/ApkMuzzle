@@ -38,7 +38,7 @@ public class FileManagerAdapter extends ArrayAdapter<String> {
         row = inflater.inflate(this.mLayoutResourceId, parent, false);
         TextView questionTxtView = (TextView) row.findViewById(R.id.rowtext);
         questionTxtView.setText(question);
-        if (question.equals(MainActivity.APPFOLDERNAME + '/'))
+        if (question.equals(MainActivity.APP_FOLDER_NAME + '/'))
             questionTxtView.setTextColor(Color.RED);
         else if (question.contains("/"))
             questionTxtView.setTextColor(Color.parseColor("#FFA500"));

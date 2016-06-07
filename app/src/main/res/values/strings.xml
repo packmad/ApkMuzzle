@@ -12,8 +12,8 @@
     <string name="action_donate">Donate!</string>
 
     <!--buttons-->
-    <string name="my_apps">FROM APPS</string>
-    <string name="read_apk">FROM APK</string>
+    <string name="my_apps">APPs</string>
+    <string name="read_apk">APK</string>
     <string name="exit">EXIT</string>
     <string name="install">Install</string>
 
@@ -27,6 +27,10 @@
     <string name="remove_from">Remove permissions... from where?</string>
     <string name="from_apk">...from an apk</string>
     <string name="from_app">...from your app</string>
+
+    <string name="no_choice">NO CHOICE</string>
+    <string name="no_choice_msg">You must select at least one thing to remove</string>
+
 
     <!--FolderLayout-->
     <string name="location">Location</string>
@@ -45,19 +49,19 @@
     <string name="must_share">You must share only Google Play Store links</string>
 
     <!--SaveApkService-->
-    <string name="removing_permissions">Removing permissions from</string>
-    <string name="finished_removing">Finished removing permission from</string>
+    <string name="removing_permissions">Muzzling </string>
+    <string name="finished_removing">Removal completed: </string>
 
 
     <!--SaveResultActivity-->
     <string name="no_messages">No messages... it\'s strange</string>
     <string name="already_installed">APP ALREADY INSTALLED</string>
     <string name="need_uninstall">You need to uninstall the old app before install this new one!</string>
-    <string name="were_errors">There were errors during the removal process that stopped the creation of the new apk.</string>
+    <string name="were_errors">There were errors during the removal process that stopped the creation of the new apk</string>
+    <string name="whence">Whence?</string>
+    <string name="what_do_you_want">What do you want to remove?</string>
+    <string name="advertising">Advertising</string>
+    <string name="perms">Permissions</string>
 
 
-    <!--
-    <string name=""></string>
-    getResources().getString(R.string.)
-    -->
 </resources>

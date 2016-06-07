@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import it.saonzo.rmperm.IOutput;
 import it.saonzo.rmperm.Main;
@@ -49,14 +50,7 @@ public class SaveApkService  extends IntentService {
 
         File newApk = new File(MainActivity.FOLDER_FILE, apkName + "_muzzle.apk");
         JarOutput jo = new JarOutput(IOutput.Level.VERBOSE);
-        String[] args = {
-                "--input" , apkPath,
-                "--remove",
-                "--custom-methods", MainActivity.CUSTOM_FILE.toString(),
-                "--permissions",  perms,
-                "--output", newApk.toString()
-        };
-        Main.androidMain(jo, args);
+        Main.androidMain(jo, getArgs(newApk));
         startNotification.setContentText(getResources().getString(R.string.finished_removing) +' '+ apkName).setNumber(2);
         mNotificationManager.notify(notifyID, startNotification.build());
 
@@ -75,6 +69,34 @@ public class SaveApkService  extends IntentService {
             return out;
         }
         return null;
+    }
+
+
+    private String[] getArgs(File newApk) {
+        boolean rmPerms = MainActivity.permsFlag;
+        boolean rmAds = MainActivity.adsFlag;
+
+        ArrayList<String> out = new ArrayList<>();
+        out.add("--input");
+        out.add(apkPath);
+        out.add("--output");
+        out.add(newApk.toString());
+
+        if (rmPerms) {
+            out.add("--remove");
+            out.add("--custom-methods");
+            out.add(MainActivity.CUSTOM_FILE.toString());
+            out.add("--permissions");
+            out.add(perms);
+        }
+        if (rmPerms && rmAds) {
+            out.add("--ads");
+        } else if (rmAds) {
+            out.add("--removeads");
+        }
+        String[] ret = new String[out.size()];
+        ret = out.toArray(ret);
+        return ret;
     }
 
 }

@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,16 +25,56 @@ import java.util.List;
 public class SaveResultActivity extends Activity {
     private String newApkPath;
 
+    /**
+     * Sets ListView height dynamically based on the height of the items.
+     *
+     * @param listView to be resized
+     * @return true if the listView is successfully resized, false otherwise
+     */
+    public static boolean setListViewHeightBasedOnItems(ListView listView) {
+
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter != null) {
+
+            int numberOfItems = listAdapter.getCount();
+
+            // Get total height of all items.
+            int totalItemsHeight = 0;
+            for (int itemPos = 0; itemPos < numberOfItems; itemPos++) {
+                View item = listAdapter.getView(itemPos, null, listView);
+                item.measure(0, 0);
+                totalItemsHeight += item.getMeasuredHeight();
+            }
+
+            // Get total height of all item dividers.
+            int totalDividersHeight = listView.getDividerHeight() *
+                    (numberOfItems - 1);
+
+            // Set list height.
+            ViewGroup.LayoutParams params = listView.getLayoutParams();
+            params.height = totalItemsHeight + totalDividersHeight;
+            listView.setLayoutParams(params);
+            listView.requestLayout();
+
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saveapkresult);
 
-        ArrayList<String> all = new ArrayList<String>();
+        ArrayList<String> all = new ArrayList<>();
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             String[] apkAndMsgs = bundle.getStringArray(SaveApkService.MSG_SAVEAPKSERVICE);
+            if (apkAndMsgs == null)
+                throw new AssertionError("Cannot read output messages");
             if (apkAndMsgs.length > 0) {
                 newApkPath = apkAndMsgs[0];
                 ArrayList<String> errors = new ArrayList<String>(Arrays.asList(apkAndMsgs[1].split("\n")));
@@ -47,9 +88,10 @@ public class SaveResultActivity extends Activity {
                 }
             }
         }
-        ListView list = (ListView) findViewById(R.id.resultlist);
+        ListView listView = (ListView) findViewById(R.id.resultlist);
         MyListAdapter mAdapter = new MyListAdapter(this, all);
-        list.setAdapter(mAdapter);
+        listView.setAdapter(mAdapter);
+        setListViewHeightBasedOnItems(listView);
     }
 
     public void installApk(View view) {

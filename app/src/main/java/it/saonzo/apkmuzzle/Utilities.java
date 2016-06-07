@@ -31,7 +31,7 @@ public class Utilities {
             out.close();
         }
         catch(IOException e){
-            //TODO
+            throw new AssertionError("Copy FAILS from " + src.toString() + " to " + dst.toString());
         }
 
     }

@@ -41,7 +41,7 @@ public class InstalledAppsActivity extends Activity {
                 String packageName = pi.packageName;
                 //Log.d("############", ">>> " + publicSourceDir+" "+packageName);
                 File src = new File(publicSourceDir);
-                File dst = new File(MainActivity.FOLDER_FILE.getPath()+"/"+packageName+".apk");
+                File dst = new File(MainActivity.FOLDER_FILE.getPath() + "/" + packageName + ".apk");
                 try {
                     dst.createNewFile();
                 } catch (IOException e) {
@@ -51,8 +51,7 @@ public class InstalledAppsActivity extends Activity {
                 Intent intent = new Intent(iaa, PermissionsMangeActivity.class);
                 intent.putExtra(PermissionsMangeActivity.EXTRA_PERMISSIONSMANAGE, dst.getAbsolutePath());
                 startActivity(intent);
-            }
-
+                }
         });
         try {
             packageList1.clear();

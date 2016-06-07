@@ -5,20 +5,20 @@
         />
     <gradient
         android:angle="45"
-        android:centerX="35%"
         android:centerColor="@color/RoyalBlue"
-        android:startColor="@color/RoyalBlue"
+        android:centerX="35%"
         android:endColor="@color/RoyalBlue"
+        android:startColor="@color/RoyalBlue"
         android:type="linear"
         />
     <padding
-        android:left="0dp"
-        android:top="0dp"
-        android:right="0dp"
         android:bottom="0dp"
+        android:left="0dp"
+        android:right="0dp"
+        android:top="0dp"
         />
     <size
-        android:width="135dp"
+        android:width="125dp"
         android:height="30dp"
         />
 </shape>
