@@ -41,11 +41,15 @@ public class MainActivity extends Activity {
         adsSwitch = (Switch) findViewById(R.id.SwitchAds);
         permsSwitch = (Switch) findViewById(R.id.SwitchPerms);
 
-        int check = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        if (check != PackageManager.PERMISSION_GRANTED)
+        int read = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        int write = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (read != PackageManager.PERMISSION_GRANTED || write != PackageManager.PERMISSION_GRANTED)
             ActivityCompat.requestPermissions(
                     this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    new String[]{
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     PERM_REQUEST
             );
     }

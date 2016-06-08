@@ -43,15 +43,22 @@ public class InstalledAppsActivity extends Activity {
                 File src = new File(publicSourceDir);
                 File dst = new File(MainActivity.FOLDER_FILE.getPath() + "/" + packageName + ".apk");
                 try {
-                    dst.createNewFile();
+                    Utilities.copyFile(src, dst);
+                    Intent intent = new Intent(iaa, PermissionsMangeActivity.class);
+                    intent.putExtra(PermissionsMangeActivity.EXTRA_PERMISSIONSMANAGE, dst.getAbsolutePath());
+                    startActivity(intent);
                 } catch (IOException e) {
-                    //TODO
+                    if (e.toString().contains("ENOSPC")) {
+                        Utilities.ShowAlertDialog(
+                                InstalledAppsActivity.this,
+                                getResources().getString(R.string.errors),
+                                getResources().getString(R.string.no_space_left)
+                        );
+                    } else
+                        throw new AssertionError("FAIL: copy from " + src.toString() + " to " + dst.toString());
                 }
-                Utilities.fileCopy(src, dst);
-                Intent intent = new Intent(iaa, PermissionsMangeActivity.class);
-                intent.putExtra(PermissionsMangeActivity.EXTRA_PERMISSIONSMANAGE, dst.getAbsolutePath());
-                startActivity(intent);
-                }
+
+            }
         });
         try {
             packageList1.clear();

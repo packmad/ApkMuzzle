@@ -11,29 +11,25 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 
 public class Utilities {
-    private final static int BUFSIZE = 1024;
 
-    public static void fileCopy(File src, File dst) {
-        try{
-            InputStream in = new FileInputStream(src);
-            OutputStream out = new FileOutputStream(dst);
-            byte[] buf = new byte[BUFSIZE];
-            int len;
-            while ((len = in.read(buf)) > 0){
-                out.write(buf, 0, len);
-            }
-            in.close();
-            out.close();
-        }
-        catch(IOException e){
-            throw new AssertionError("Copy FAILS from " + src.toString() + " to " + dst.toString());
-        }
+    public static void copyFile(File src, File dst) throws IOException {
+        if (!dst.exists())
+            dst.createNewFile();
 
+        FileInputStream in = new FileInputStream(src);
+        FileOutputStream out = new FileOutputStream(dst);
+
+        byte[] buffer = new byte[1024];
+        int read;
+        while ((read = in.read(buffer)) != -1) {
+            out.write(buffer, 0, read);
+        }
+        in.close();
+        out.flush();
+        out.close();
     }
 
     public static void ShowAlertDialog(Context context, String title, String message) {

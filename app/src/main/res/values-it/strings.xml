@@ -39,4 +39,5 @@
     <string name="advertising">Pubblicità</string>
     <string name="perms">Permessi</string>
     <string name="what_do_you_want">Che cosa vuoi rimuovere?</string>
+    <string name="no_space_left">Spazio insufficiente sul dispositivo</string>
 </resources>

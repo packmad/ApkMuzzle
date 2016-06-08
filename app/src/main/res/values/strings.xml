@@ -6,6 +6,7 @@
     <string name="not_implemented">Not implemented yet</string>
     <string name="errors">ERRORS!</string>
     <string name="close">Close</string>
+    <string name="no_space_left">No space left on device"</string>
 
     <!--actions-->
     <string name="action_settings">Settings</string>
