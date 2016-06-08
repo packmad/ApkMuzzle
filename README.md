@@ -6,7 +6,7 @@ How it works? It uses [RmPerm](https://github.com/simoneaonzo/RmPerm) (follow th
 
 ## Available on Google Play Store
 
-You can clone this repo and build it...  or you can comfortably download the app [from the Google Play Store](https://play.google.com/store/apps/details?id=it.
+You can clone this repo and build it...  or you can comfortably download the app [from the Google Play Store](https://play.google.com/store/apps/details?id=it.saonzo.apkmuzzle)
 
 ## How can I use it?
 
