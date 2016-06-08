@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
@@ -41,17 +42,23 @@ public class MainActivity extends Activity {
         adsSwitch = (Switch) findViewById(R.id.SwitchAds);
         permsSwitch = (Switch) findViewById(R.id.SwitchPerms);
 
-        int read = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        int write = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
-        if (read != PackageManager.PERMISSION_GRANTED || write != PackageManager.PERMISSION_GRANTED)
-            ActivityCompat.requestPermissions(
-                    this,
-                    new String[]{
-                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    PERM_REQUEST
-            );
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            int read = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+            int write = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+            if (read != PackageManager.PERMISSION_GRANTED || write != PackageManager.PERMISSION_GRANTED)
+                ActivityCompat.requestPermissions(
+                        this,
+                        new String[]{
+                                Manifest.permission.READ_EXTERNAL_STORAGE,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        PERM_REQUEST
+                );
+        } else {
+            prepareFileAndFolders();
+        }
+
     }
 
     @Override
@@ -60,32 +67,35 @@ public class MainActivity extends Activity {
             case PERM_REQUEST: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    FOLDER_FILE.mkdirs();
-                    if (!FOLDER_FILE.exists())
-                        throw new AssertionError("Error creating " + FOLDER_FILE.toString());
-                    if (!CUSTOM_FILE.exists()) {
-                        try {
-                            AssetManager assetManager = getAssets();
-                            InputStream in = assetManager.open(CUSTOM_METHODS_RES);
-                            OutputStream out = new FileOutputStream(CUSTOM_FILE);
-                            byte[] buffer = new byte[1024];
-                            int read;
-                            while ((read = in.read(buffer)) != -1) {
-                                out.write(buffer, 0, read);
-                            }
-                            in.close();
-                            out.flush();
-                            out.close();
-                        } catch (IOException ioe) {
-                            throw new AssertionError("Error creating " + CUSTOM_FILE.toString());
-                        }
-                    }
-
+                    prepareFileAndFolders();
                 } else {
                     throw new AssertionError("This app need the READ_EXTERNAL_STORAGE permission");
                 }
             }
 
+        }
+    }
+
+    private void prepareFileAndFolders() {
+        FOLDER_FILE.mkdirs();
+        if (!FOLDER_FILE.exists())
+            throw new AssertionError("Error creating " + FOLDER_FILE.toString());
+        if (!CUSTOM_FILE.exists()) {
+            try {
+                AssetManager assetManager = getAssets();
+                InputStream in = assetManager.open(CUSTOM_METHODS_RES);
+                OutputStream out = new FileOutputStream(CUSTOM_FILE);
+                byte[] buffer = new byte[1024];
+                int read;
+                while ((read = in.read(buffer)) != -1) {
+                    out.write(buffer, 0, read);
+                }
+                in.close();
+                out.flush();
+                out.close();
+            } catch (IOException ioe) {
+                throw new AssertionError("Error creating " + CUSTOM_FILE.toString());
+            }
         }
     }
 
